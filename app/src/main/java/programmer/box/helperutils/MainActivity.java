@@ -18,5 +18,11 @@ public class MainActivity extends AppCompatActivity {
         UtilLog.e("Hello");
         UtilLog.v("Hello");
 
+        UtilLog.d("Hello", "World");
+        UtilLog.e("Hello", "World");
+        UtilLog.w("Hello", "World");
+        UtilLog.e("Hello", "World");
+        UtilLog.v("Hello", "World");
+
     }
 }

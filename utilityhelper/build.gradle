@@ -1,5 +1,10 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'com.github.dcendents.android-maven'
+// Replace nisrulz with <your_github_username>
+group='com.github.jakepurple13'
+version='0.1'
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
