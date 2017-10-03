@@ -19,3 +19,19 @@ UtilLog.w("Hello", "World");
 UtilLog.e("Hello", "World");
 UtilLog.v("Hello", "World");
 ```
+
+
+Add
+```xml
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+```xml
+  	dependencies {
+	        compile 'com.github.jakepurple13:HelperUtils2:v0.1'
+	}
+```
