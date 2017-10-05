@@ -44,6 +44,20 @@ UtilLog.v("Hello", "World");
 
 ```
 
+# Notification
+
+```java
+
+
+UtilNotification.sendNotification(MainActivity.this, android.R.mipmap.sym_def_app_icon, "Title", "Message", "Channel", MainActivity.class, 1);
+            
+UtilNotification.sendReplyNotification(MainActivity.this, android.R.mipmap.sym_def_app_icon, android.R.mipmap.sym_def_app_icon, "Reply", "Reply", "Title", "Message","Channel", MainActivity.class, 1);
+
+UtilNotification.createNotificationChannel(MainActivity.this, "Channel", "Description", "Channel");
+
+UtilNotification.createNotificationGroup(MainActivity.this, "group", "group_name");
+
+```
 
 # Add to project
 
@@ -58,6 +72,6 @@ allprojects {
 ```
 ```xml
   	dependencies {
-	        compile 'com.github.jakepurple13:HelperUtils2:v0.1'
+	        compile 'com.github.jakepurple13:HelperUtils2:v0.3'
 	}
 ```
