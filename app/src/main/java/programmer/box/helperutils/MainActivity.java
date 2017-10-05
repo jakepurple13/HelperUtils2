@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import programmer.box.utilityhelper.UtilImage;
 import programmer.box.utilityhelper.UtilLog;
+import programmer.box.utilityhelper.UtilNotification;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +37,42 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 UtilImage.changeImageViewTintColor((ImageView) v, R.color.colorPrimaryDark);
+            }
+        });
+
+        Button noti = findViewById(R.id.noti);
+
+        noti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UtilNotification.sendNotification(MainActivity.this, android.R.mipmap.sym_def_app_icon, "Title", "Message", "Channel", MainActivity.class, 1);
+            }
+        });
+
+        Button notiReply = findViewById(R.id.noti_reply);
+
+        notiReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UtilNotification.sendReplyNotification(MainActivity.this, android.R.mipmap.sym_def_app_icon, android.R.mipmap.sym_def_app_icon, "Reply", "Reply", "Title", "Message","Channel", MainActivity.class, 1);
+            }
+        });
+
+        Button channel = findViewById(R.id.channel);
+
+        channel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UtilNotification.createNotificationChannel(MainActivity.this, "Channel", "Description", "Channel");
+            }
+        });
+
+        Button group = findViewById(R.id.group);
+
+        group.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UtilNotification.createNotificationGroup(MainActivity.this, "group", "group_name");
             }
         });
 
