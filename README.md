@@ -57,6 +57,34 @@ UtilNotification.createNotificationChannel(MainActivity.this, "Channel", "Descri
 
 UtilNotification.createNotificationGroup(MainActivity.this, "group", "group_name");
 
+UtilNotification.showSnackbar(v, "Hello", UtilNotification.Lengths.LONG, "World", new UtilNotification.SnackBarAction() {
+                    @Override
+                    public void snackClick(Snackbar snackbar) {
+                        snackbar.dismiss();
+                    }
+                });
+                
+UtilNotification.showToast(MainActivity.this, "Hello", UtilNotification.Lengths.LONG);
+
+UtilNotification.showMenu(MainActivity.this, v, R.menu.sample_menu, new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        if(item.getItemId()==R.id.hello) {
+                            UtilNotification.showSnackbar(v, "Hello was pressed", UtilNotification.Lengths.LONG, "Cool!", new UtilNotification.SnackBarAction() {
+                                @Override
+                                public void snackClick(Snackbar snackbar) {
+                                    snackbar.dismiss();
+                                }
+                            });
+                            return true;
+                        }
+
+                        return false;
+                    }
+                });
+
+
 ```
 
 # Add to project
