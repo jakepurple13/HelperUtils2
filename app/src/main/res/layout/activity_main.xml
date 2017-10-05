@@ -49,4 +49,20 @@
         android:layout_below="@+id/channel"
         android:text="Create Notification Group" />
 
+    <Button
+        android:id="@+id/snacky"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/noti_reply"
+        android:layout_below="@+id/noti_reply"
+        android:text="Show SnackBar" />
+
+    <Button
+        android:id="@+id/toasty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/snacky"
+        android:layout_below="@+id/snacky"
+        android:text="Show Toast" />
+
 </RelativeLayout>

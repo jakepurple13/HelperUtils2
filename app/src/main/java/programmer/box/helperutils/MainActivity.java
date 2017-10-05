@@ -1,10 +1,14 @@
 package programmer.box.helperutils;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import programmer.box.utilityhelper.UtilImage;
 import programmer.box.utilityhelper.UtilLog;
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         notiReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UtilNotification.sendReplyNotification(MainActivity.this, android.R.mipmap.sym_def_app_icon, android.R.mipmap.sym_def_app_icon, "Reply", "Reply", "Title", "Message","Channel", MainActivity.class, 1);
+                UtilNotification.sendReplyNotification(MainActivity.this, android.R.mipmap.sym_def_app_icon, android.R.mipmap.sym_def_app_icon, "Reply", "Reply", "REPLYID", "Title", "Message","Channel", MainActivity.class, 1);
             }
         });
 
@@ -75,6 +79,58 @@ public class MainActivity extends AppCompatActivity {
                 UtilNotification.createNotificationGroup(MainActivity.this, "group", "group_name");
             }
         });
+
+        Button snack = findViewById(R.id.snacky);
+
+        snack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                UtilNotification.showSnackbar(v, "Hello", UtilNotification.Lengths.LONG, "World", new UtilNotification.SnackBarAction() {
+                    @Override
+                    public void snackClick(Snackbar snackbar) {
+                        snackbar.dismiss();
+                    }
+                });
+            }
+        });
+
+        Button toast = findViewById(R.id.toasty);
+
+        toast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UtilNotification.showToast(MainActivity.this, "Hello", UtilNotification.Lengths.LONG);
+            }
+        });
+
+        snack.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(final View v) {
+                UtilNotification.showMenu(MainActivity.this, v, R.menu.sample_menu, new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        if(item.getItemId()==R.id.hello) {
+                            UtilNotification.showSnackbar(v, "Hello was pressed", UtilNotification.Lengths.LONG, "Cool!", new UtilNotification.SnackBarAction() {
+                                @Override
+                                public void snackClick(Snackbar snackbar) {
+                                    snackbar.dismiss();
+                                }
+                            });
+                            return true;
+                        }
+
+                        return false;
+                    }
+                });
+                return true;
+            }
+        });
+
+
+
+
 
     }
 }
