@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import programmer.box.utilityhelper.UtilImage;
 import programmer.box.utilityhelper.UtilLog;
+import programmer.box.utilityhelper.UtilMedia;
 import programmer.box.utilityhelper.UtilNotification;
 
 public class MainActivity extends AppCompatActivity {
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                             UtilNotification.showSnackbar(v, "Hello was pressed", UtilNotification.Lengths.LONG, "Cool!", new UtilNotification.SnackBarAction() {
                                 @Override
                                 public void snackClick(Snackbar snackbar) {
+                                    UtilMedia.mediaRouter();
                                     snackbar.dismiss();
                                 }
                             });
