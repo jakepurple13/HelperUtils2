@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -70,6 +71,38 @@ public class UtilImage {
     public static int getDominanteColorFromDrawable(Context context, int resid, int defaultColor) {
         Bitmap icon = BitmapFactory.decodeResource(context.getResources(), resid);
         return Palette.from(icon).generate().getDominantColor(defaultColor);
+    }
+
+    /**
+     * lighter - Lightens a color by a given factor. TAKEN FROM STACKOVERFLOW <a href="https://stackoverflow.com/a/28058035">https://stackoverflow.com/a/28058035</a>
+     *
+     * @param color
+     *            The color to lighten
+     * @param factor
+     *            The factor to lighten the color. 0 will make the color unchanged. 1 will make the
+     *            color white.
+     * @return lighter version of the specified color.
+     */
+    public static int lighter(int color, float factor) {
+        int red = (int) ((Color.red(color) * (1 - factor) / 255 + factor) * 255);
+        int green = (int) ((Color.green(color) * (1 - factor) / 255 + factor) * 255);
+        int blue = (int) ((Color.blue(color) * (1 - factor) / 255 + factor) * 255);
+        return Color.argb(Color.alpha(color), red, green, blue);
+    }
+
+    /**
+     * Returns darker version of specified <code>color</code>. TAKEN FROM STACKOVERFLOW <a href="https://stackoverflow.com/a/26554179">https://stackoverflow.com/a/26554179</a>
+     */
+    public static int darker (int color, float factor) {
+        int a = Color.alpha( color );
+        int r = Color.red( color );
+        int g = Color.green( color );
+        int b = Color.blue( color );
+
+        return Color.argb( a,
+                Math.max( (int)(r * factor), 0 ),
+                Math.max( (int)(g * factor), 0 ),
+                Math.max( (int)(b * factor), 0 ) );
     }
 
 }

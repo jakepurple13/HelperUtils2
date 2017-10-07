@@ -130,6 +130,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        toast.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                UtilMedia.textToSpeech(MainActivity.this, "Hello world");
+
+                return true;
+            }
+        });
+
+        noti.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                UtilMedia.textToSpeech(MainActivity.this, "Kawaii");
+
+                return true;
+            }
+        });
+
+        notiReply.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                UtilMedia.speechToText(v.getContext(), new UtilMedia.SpeechListener() {
+                    @Override
+                    public void getResult(String text) {
+                        UtilLog.v(text);
+                    }
+                });
+                return true;
+            }
+        });
+
 
 
 

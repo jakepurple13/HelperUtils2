@@ -1,6 +1,7 @@
 package programmer.box.utilityhelper;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -31,6 +32,24 @@ public class UtilDevice {
         return batteryPct;
     }
 
+    public static void getBatteryState(Context context, final BatteryInfo info) {
 
+        BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context ctxt, Intent intent) {
+                int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+                info.currentLevel(level);
+            }
+        };
+
+        context.registerReceiver(mBatInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
+    }
+
+    public interface BatteryInfo {
+
+        public void currentLevel(int level);
+
+    }
 
 }
