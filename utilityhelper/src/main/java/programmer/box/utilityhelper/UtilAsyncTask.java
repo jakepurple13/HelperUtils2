@@ -8,13 +8,13 @@ import android.os.AsyncTask;
 
 public abstract class UtilAsyncTask extends AsyncTask<Void, Integer, Boolean> {
 
-    abstract void onPreExecutes();
+    public abstract void onPreExecutes();
 
-    abstract boolean onBackgrounds(Void... voids);
+    public abstract boolean onBackgrounds(Void... voids);
 
-    abstract void onPostExecutes(Boolean o);
+    public abstract void onPostExecutes(Boolean o);
 
-    abstract void onProgressUpdates(Integer[] values);
+    public abstract void onProgressUpdates(Integer[] values);
 
     public void updateProgress(Integer... values) {
         publishProgress(values);
