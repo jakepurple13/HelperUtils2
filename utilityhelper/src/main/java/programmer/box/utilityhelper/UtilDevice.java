@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -16,6 +18,8 @@ import android.view.Window;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 /**
  * Created by Jacob on 10/5/17.
@@ -86,6 +90,12 @@ public class UtilDevice {
         if (!permissions.isEmpty()) {
             activity.requestPermissions(permissions.toArray(new String[permissions.size()]), requestCode);
         }
+    }
+
+    public void copyText(Context context, String message) {
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(message, message);
+        clipboard.setPrimaryClip(clip);
     }
 
 }

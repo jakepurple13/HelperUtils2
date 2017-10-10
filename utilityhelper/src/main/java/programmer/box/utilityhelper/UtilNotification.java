@@ -218,7 +218,7 @@ public class UtilNotification {
      * @return the toast
      */
     public static Toast showToast(Context context, String message, Lengths length) {
-        Toast toast = Toast.makeText(context, message, length.length);
+        Toast toast = createToast(context, message, length);
         toast.show();
         return toast;
     }
@@ -231,7 +231,36 @@ public class UtilNotification {
      * @return the toast
      */
     public static Toast showToast(Context context, String message, int length) {
-        Toast toast = Toast.makeText(context, message, length);
+        Toast toast = createToast(context, message, length);
+        toast.show();
+        return toast;
+    }
+
+    /**
+     * createColoredToast - creates and shows a toast message
+     * @param context the context
+     * @param message the message
+     * @param length the length
+     * @param color the color of the toast
+     * @return the toast
+     */
+    public static Toast createColoredToast(Context context, String message, int length, int color) {
+        Toast toast = createToast(context, message, length);
+        toast.getView().getBackground().setTint(color);
+        return toast;
+    }
+
+    /**
+     * showColoredToast - creates and shows a toast message
+     * @param context the context
+     * @param message the message
+     * @param length the length
+     * @param color the color of the toast
+     * @return the toast
+     */
+    public static Toast showColoredToast(Context context, String message, int length, int color) {
+        Toast toast = createToast(context, message, length);
+        toast.getView().getBackground().setTint(color);
         toast.show();
         return toast;
     }
@@ -268,13 +297,8 @@ public class UtilNotification {
      * @return the snackbar
      */
     public static Snackbar showSnackbar(View v, String message, Lengths length, String actionText, final SnackBarAction actionClick) {
-        final Snackbar snackbar = Snackbar.make(v, message, length.length);
-        snackbar.setAction(actionText, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                actionClick.snackClick(snackbar);
-            }
-        }).show();
+        final Snackbar snackbar = createSnackbar(v, message, length, actionText, actionClick);
+        snackbar.show();
         return snackbar;
     }
 
@@ -288,13 +312,23 @@ public class UtilNotification {
      * @return the snackbar
      */
     public static Snackbar showSnackbar(View v, String message, int length, String actionText, final SnackBarAction actionClick) {
-        final Snackbar snackbar = Snackbar.make(v, message, length);
-        snackbar.setAction(actionText, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                actionClick.snackClick(snackbar);
-            }
-        }).show();
+        final Snackbar snackbar = createSnackbar(v, message, length, actionText, actionClick);
+        snackbar.show();
+        return snackbar;
+    }
+
+    /**
+     * createSnackbar creates a snack bar
+     * @param v a view that is needed
+     * @param message the message
+     * @param length the length
+     * @param actionText the action text
+     * @param actionClick the action's action
+     * @return the snackbar
+     */
+    public static Snackbar showColoredSnackbar(View v, String message, int length, String actionText, final SnackBarAction actionClick, int actionTextColor, int color) {
+        final Snackbar snackbar = createColoredSnackbar(v, message, length, actionText, actionClick, actionTextColor, color);
+        snackbar.show();
         return snackbar;
     }
 
@@ -312,9 +346,31 @@ public class UtilNotification {
         snackbar.setAction(actionText, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actionClick.snackClick(snackbar);
+                actionClick.snackClick(snackbar, v);
             }
         });
+        return snackbar;
+    }
+
+    /**
+     * createSnackbar creates a snack bar
+     * @param v a view that is needed
+     * @param message the message
+     * @param length the length
+     * @param actionText the action text
+     * @param actionClick the action's action
+     * @return the snackbar
+     */
+    public static Snackbar createColoredSnackbar(View v, String message, int length, String actionText, final SnackBarAction actionClick, int actionTextColor,  int color) {
+        final Snackbar snackbar = Snackbar.make(v, message, length);
+        snackbar.setAction(actionText, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actionClick.snackClick(snackbar, v);
+            }
+        });
+        snackbar.setActionTextColor(actionTextColor);
+        snackbar.getView().getBackground().setTint(color);
         return snackbar;
     }
 
@@ -332,7 +388,7 @@ public class UtilNotification {
         snackbar.setAction(actionText, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actionClick.snackClick(snackbar);
+                actionClick.snackClick(snackbar, v);
             }
         });
         return snackbar;
@@ -356,7 +412,7 @@ public class UtilNotification {
     }
 
     public interface SnackBarAction {
-        public void snackClick(Snackbar snackbar);
+        public void snackClick(Snackbar snackbar, View v);
     }
 
     public enum Lengths {

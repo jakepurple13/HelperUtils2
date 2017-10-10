@@ -3,6 +3,7 @@ package programmer.box.helperutils;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import programmer.box.utilityhelper.UtilAsyncTask;
+import programmer.box.utilityhelper.UtilDevice;
 import programmer.box.utilityhelper.UtilImage;
 import programmer.box.utilityhelper.UtilLog;
 import programmer.box.utilityhelper.UtilMedia;
@@ -91,12 +93,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                UtilNotification.showSnackbar(v, "Hello", UtilNotification.Lengths.LONG, "World", new UtilNotification.SnackBarAction() {
+                /*UtilNotification.showSnackbar(v, "Hello", UtilNotification.Lengths.LONG, "World", new UtilNotification.SnackBarAction() {
                     @Override
                     public void snackClick(Snackbar snackbar) {
                         snackbar.dismiss();
                     }
-                });
+                });*/
+
+                UtilNotification.showColoredToast(v.getContext(), "Hello There", Toast.LENGTH_LONG, Color.BLUE);
             }
         });
 
@@ -150,8 +154,9 @@ public class MainActivity extends AppCompatActivity {
                         if(item.getItemId()==R.id.hello) {
                             UtilNotification.showSnackbar(v, "Hello was pressed", UtilNotification.Lengths.LONG, "Cool!", new UtilNotification.SnackBarAction() {
                                 @Override
-                                public void snackClick(Snackbar snackbar) {
-                                    UtilMedia.mediaRouter();
+                                public void snackClick(Snackbar snackbar, View v) {
+                                    //UtilMedia.mediaRouter();
+                                    UtilNotification.showToast(v.getContext(), "Hi", Toast.LENGTH_LONG);
                                     snackbar.dismiss();
                                 }
                             });
@@ -169,7 +174,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
 
-                UtilMedia.textToSpeech(MainActivity.this, "Hello world");
+                //UtilMedia.textToSpeech(MainActivity.this, "Hello world");
+
+                UtilNotification.createColoredSnackbar(v, "Hello", Snackbar.LENGTH_LONG, "Hello", new UtilNotification.SnackBarAction() {
+                    @Override
+                    public void snackClick(Snackbar snackbar, View v) {
+                        snackbar.dismiss();
+                    }
+                }, Color.RED, Color.DKGRAY).show();
 
                 return true;
             }
@@ -198,8 +210,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
+        UtilDevice.getBatteryState(this, new UtilDevice.BatteryInfo() {
+            @Override
+            public void currentLevel(int level) {
+                UtilLog.e("The current level is " + level + "%");
+                UtilNotification.showColoredToast(MainActivity.this, "The current level is " + level + "%", Toast.LENGTH_LONG, Color.GRAY);
+            }
+        });
 
 
     }
