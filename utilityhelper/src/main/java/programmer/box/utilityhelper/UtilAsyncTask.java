@@ -1,5 +1,6 @@
 package programmer.box.utilityhelper;
 
+import android.app.Dialog;
 import android.os.AsyncTask;
 
 /**
@@ -7,6 +8,16 @@ import android.os.AsyncTask;
  */
 
 public abstract class UtilAsyncTask extends AsyncTask<Void, Integer, Boolean> {
+
+    public Dialog dialog;
+
+    public UtilAsyncTask(Dialog dialog) {
+        this.dialog = dialog;
+    }
+
+    public UtilAsyncTask() {
+
+    }
 
     public abstract void onPreExecutes();
 
@@ -21,15 +32,23 @@ public abstract class UtilAsyncTask extends AsyncTask<Void, Integer, Boolean> {
     }
 
     @Override
-    protected void onPostExecute(Boolean o) {
-        super.onPostExecute(o);
-        onPostExecutes(o);
+    protected void onPreExecute() {
+        super.onPreExecute();
+        if(dialog != null) {
+            dialog.show();
+        }
+        onPreExecutes();
     }
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        onPreExecutes();
+    protected void onPostExecute(Boolean o) {
+        super.onPostExecute(o);
+        if(o) {
+            if (dialog != null) {
+                dialog.dismiss();
+            }
+        }
+        onPostExecutes(o);
     }
 
     @Override

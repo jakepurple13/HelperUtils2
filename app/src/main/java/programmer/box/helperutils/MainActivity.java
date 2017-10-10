@@ -1,5 +1,8 @@
 package programmer.box.helperutils;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import programmer.box.utilityhelper.UtilAsyncTask;
 import programmer.box.utilityhelper.UtilImage;
 import programmer.box.utilityhelper.UtilLog;
 import programmer.box.utilityhelper.UtilMedia;
@@ -101,7 +105,38 @@ public class MainActivity extends AppCompatActivity {
         toast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UtilNotification.showToast(MainActivity.this, "Hello", UtilNotification.Lengths.LONG);
+                //UtilNotification.showToast(MainActivity.this, "Hello", UtilNotification.Lengths.LONG);
+
+                Dialog dialogs = new AlertDialog.Builder(v.getContext())
+                        .setMessage("Please Wait").setTitle("Wait please").create();
+
+                @SuppressLint("StaticFieldLeak") UtilAsyncTask task = new UtilAsyncTask(dialogs) {
+                    @Override
+                    public void onPreExecutes() {
+                        UtilLog.e("Hello");
+                    }
+
+                    @Override
+                    public boolean onBackgrounds(Void... voids) {
+
+                        for(int i=0;i<1000;i++) {
+                            publishProgress(i);
+                        }
+
+                        return true;
+                    }
+
+                    @Override
+                    public void onPostExecutes(Boolean o) {
+                        UtilLog.e("World");
+                    }
+
+                    @Override
+                    public void onProgressUpdates(Integer[] values) {
+                        UtilLog.i("i: " + values[0]);
+                        dialog.setTitle("i: " + values[0]);
+                    }
+                }.startTask();
             }
         });
 
