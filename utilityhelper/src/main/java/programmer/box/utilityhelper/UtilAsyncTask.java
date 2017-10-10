@@ -43,7 +43,7 @@ public abstract class UtilAsyncTask extends AsyncTask<Void, Integer, Boolean> {
         return onBackgrounds(voids);
     }
 
-    public UtilAsyncTask startTask(Void...params) {
+    public UtilAsyncTask startTask(Void... params) {
         execute(params);
         return this;
     }
