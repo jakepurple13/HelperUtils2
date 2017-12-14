@@ -24,20 +24,6 @@ import java.net.URL;
 
 public class UtilImage {
 
-    /*public static Drawable colorImage(Context context, int resid, int color) {
-        Drawable mDrawable = context.getResources().getDrawable(resid, null);
-        mDrawable.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
-        return mDrawable;
-    }
-
-    public static Drawable colorImage(Context context, int resid, String color) {
-        long thisCol=Long.decode(color)+4278190080L;
-        int useColour=(int)thisCol;
-        Drawable mDrawable = context.getResources().getDrawable(resid, null);
-        mDrawable.setColorFilter(new PorterDuffColorFilter(useColour, PorterDuff.Mode.MULTIPLY));
-        return mDrawable;
-    }*/
-
     /**
      * changeImageViewTintColor - changes the color of an imageview
      * @param iv the imageview
