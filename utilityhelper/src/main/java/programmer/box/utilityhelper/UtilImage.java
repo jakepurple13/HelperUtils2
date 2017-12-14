@@ -47,6 +47,10 @@ public class UtilImage {
         iv.setColorFilter(ContextCompat.getColor(iv.getContext(), color), android.graphics.PorterDuff.Mode.MULTIPLY);
     }
 
+    public static void changeDrawableColor(Drawable d, int color) {
+        d.mutate().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+    }
+
     public static Palette getPaletteFromImage(Bitmap bitmap) {
         return Palette.from(bitmap).generate();
     }

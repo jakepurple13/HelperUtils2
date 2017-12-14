@@ -27,11 +27,21 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 
 public class UtilDevice {
 
+    /**
+     * changeStatusBarColor - changes the status bare color
+     * @param activity - the activity
+     * @param color - the color to change it to
+     */
     public static void changeStatusBarColor(Activity activity, int color) {
         Window window = activity.getWindow();
         window.setStatusBarColor(color);
     }
 
+    /**
+     * getBatteryInfo - gets current battery info
+     * @param context
+     * @return battery percentage
+     */
     public static float getBatteryInfo(Context context) {
 
         IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
@@ -45,6 +55,11 @@ public class UtilDevice {
         return batteryPct;
     }
 
+    /**
+     * getBatteryState - allows battery notifications
+     * @param context
+     * @param info - custom callback
+     */
     public static void getBatteryState(Context context, final BatteryInfo info) {
 
         BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
