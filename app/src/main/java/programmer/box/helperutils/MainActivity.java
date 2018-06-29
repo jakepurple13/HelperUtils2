@@ -31,17 +31,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        UtilLog.FILTER_BY_CLASS_NAME = "box";
+
         UtilLog.d("Hello");
         UtilLog.e("Hello");
         UtilLog.w("Hello");
-        UtilLog.e("Hello");
+        UtilLog.a("Hello");
         UtilLog.v("Hello");
 
-        UtilLog.d("Hello", "World");
-        UtilLog.e("Hello", "World");
-        UtilLog.w("Hello", "World");
-        UtilLog.e("Hello", "World");
-        UtilLog.v("Hello", "World");
+        UtilLog.SHOW_PRETTY = false;
+
+        UtilLog.d("Hello");
+        UtilLog.e("Hello");
+        UtilLog.w("Hello");
+        UtilLog.a("Hello");
+        UtilLog.v("Hello");
 
         ImageView iv = findViewById(R.id.imageView);
 
