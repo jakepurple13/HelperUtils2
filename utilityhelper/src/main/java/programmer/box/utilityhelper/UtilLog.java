@@ -49,7 +49,8 @@ public class UtilLog {
                         && !stackTraceElement[i - 1].getClassName().contains(HELPER_NAME)) {
                     //if there are more calls in the chain, get ready to add more
                     char typeOfArrow;
-                    if (stackTraceElement[i - 2].getMethodName().compareTo(methodEnd) != 0)
+                    if (stackTraceElement[i - 2].getMethodName().compareTo(methodEnd) != 0
+                            && !stackTraceElement[i - 2].getClassName().contains(HELPER_NAME))
                         typeOfArrow = 9568; //middle arrow
                     else
                         typeOfArrow = 9562; //ending arrow
