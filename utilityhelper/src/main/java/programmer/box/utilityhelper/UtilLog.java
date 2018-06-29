@@ -2,6 +2,11 @@ package programmer.box.utilityhelper;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by Jacob on 10/3/17.
  */
@@ -14,52 +19,50 @@ public class UtilLog {
     public static String TAG = "UtilLog";
 
     private static void prettyLog(String msg, int level) {
-        String methodEnd = "prettyLog";
         //the main message to be logged
         StringBuilder logged = new StringBuilder(msg);
         //the arrow for the stack trace
         String arrow = "" + ((char) 9552) + ((char) 9655) + "\t";
         //the stack trace
         StackTraceElement[] stackTraceElement = Thread.currentThread().getStackTrace();
-        //the location of the stack
-        StringBuilder location = new StringBuilder("\n");
-        //lets go through the stack
-        for (int i = stackTraceElement.length - 1; i >= 0; i--) {
-            //until we get to this method
-            if (stackTraceElement[i].getMethodName().compareTo(methodEnd) == 0) {
-                break;
-            }
-            //get the full class name
-            String fullClassName = stackTraceElement[i].getClassName();
-            //only add method if its apart of the crestron modules (for now)
-            if (fullClassName.contains(FILTER_BY_CLASS_NAME) && !fullClassName.contains(HELPER_NAME)) {
-                //get the method name
-                String methodName = stackTraceElement[i].getMethodName();
-                //get the file name
-                String fileName = stackTraceElement[i].getFileName();
-                //get the line number
-                String lineNumber = String.valueOf(stackTraceElement[i].getLineNumber());
-                //add this to location in a format where we can click on the number in the console
-                location.append(fullClassName)
-                        .append(".").append(methodName)
-                        .append("(").append(fileName)
-                        .append(":").append(lineNumber).append(")");
-                //if the next method is not prettyLog and i is not 0
-                if (stackTraceElement[i - 1].getMethodName().compareTo(methodEnd) != 0 && i != 0
-                        && !stackTraceElement[i - 1].getClassName().contains(HELPER_NAME)) {
-                    //if there are more calls in the chain, get ready to add more
-                    char typeOfArrow;
-                    if (stackTraceElement[i - 2].getMethodName().compareTo(methodEnd) != 0
-                            && !stackTraceElement[i - 2].getClassName().contains(HELPER_NAME))
-                        typeOfArrow = 9568; //middle arrow
-                    else
-                        typeOfArrow = 9562; //ending arrow
-                    location.append("\n\t").append(typeOfArrow).append(arrow);
-                }
+
+        List<StackTraceElement> elements = Arrays.asList(stackTraceElement);
+        List<StackTraceElement> wanted = new ArrayList<>();
+
+        for (int i = 0; i < elements.size(); i++) {
+            if (elements.get(i).getClassName().contains(FILTER_BY_CLASS_NAME) &&
+                    !elements.get(i).getClassName().contains(HELPER_NAME)) {
+                wanted.add(elements.get(i));
             }
         }
-        //add the location to what we will be logging
-        logged.append(location);
+
+        StringBuilder loc = new StringBuilder("\n");
+
+        for (int i = wanted.size() - 1; i >= 0; i--) {
+            String fullClassName = wanted.get(i).getClassName();
+            //get the method name
+            String methodName = wanted.get(i).getMethodName();
+            //get the file name
+            String fileName = wanted.get(i).getFileName();
+            //get the line number
+            String lineNumber = String.valueOf(wanted.get(i).getLineNumber());
+            //add this to location in a format where we can click on the number in the console
+            loc.append(fullClassName)
+                    .append(".").append(methodName)
+                    .append("(").append(fileName)
+                    .append(":").append(lineNumber).append(")");
+
+            if (wanted.size() > 1 && i-1>=0) {
+                char typeOfArrow;
+                if (i - 1 > 0)
+                    typeOfArrow = 9568; //middle arrow
+                else
+                    typeOfArrow = 9562; //ending arrow
+                loc.append("\n\t").append(typeOfArrow).append(arrow);
+            }
+        }
+
+        logged.append(loc);
 
         Log.println(level, TAG, logged.toString());
     }

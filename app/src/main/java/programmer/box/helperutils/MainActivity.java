@@ -4,17 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.graphics.Color;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.TooltipCompat;
-import android.view.Gravity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import programmer.box.utilityhelper.UtilAsyncTask;
@@ -38,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         UtilLog.w("Hello");
         UtilLog.a("Hello");
         UtilLog.v("Hello");
+
+        asdf();
+        zxcv();
 
         UtilLog.SHOW_PRETTY = false;
 
@@ -151,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        snack.setOnLongClickListener(new View.OnLongClickListener() {
+        /*snack.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(final View v) {
                 UtilNotification.showMenu(MainActivity.this, v, R.menu.sample_menu, new PopupMenu.OnMenuItemClickListener() {
@@ -192,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             }
-        });
+        });*/
 
         noti.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -227,4 +226,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void zxcv() {
+        asdf();
+    }
+
+    public void asdf() {
+        UtilLog.d("Hello");
+        UtilLog.e("Hello");
+        UtilLog.w("Hello");
+        UtilLog.a("Hello");
+        UtilLog.v("Hello");
+    }
+
 }
