@@ -5,8 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/HelperUtils.iml" filepath="$PROJECT_DIR$/HelperUtils.iml" />
       <module fileurl="file://$PROJECT_DIR$/HelperUtils2.iml" filepath="$PROJECT_DIR$/HelperUtils2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/utilityhelper/utilityhelper.iml" filepath="$PROJECT_DIR$/utilityhelper/utilityhelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/utilityhelper/utilityhelper.iml" filepath="$PROJECT_DIR$/utilityhelper/utilityhelper.iml" />
     </modules>
   </component>
